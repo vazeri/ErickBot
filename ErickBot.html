@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="src/build/botui.min.css">
+  <link rel="stylesheet" href="src/build/botui-theme-default.css">
+</head>
+
+<body>
+  <div class="botui-app-container" id="hello-world">
+    <bot-ui></bot-ui>
+  </div>
+  <script src="https://cdn.jsdelivr.net/vue/2.0.5/vue.min.js"></script>
+  <script src="src/build/botui.js"></script>
+  <script>
+      var botui = new BotUI('hello-world'); // id de contenedor
+
+      botui.message.bot({
+          delay: 200,
+          content: '¡Hola, soy Erick!'
+      }).then(function () {
+          return botui.message.bot({
+              loading: true,
+              delay: 1750,
+              content: 'soy un Desarrollador Front-End'
+          });
+      }).then(function () {
+          return botui.message.bot({
+              loading: true,
+              delay: 2000,
+              content: 'Tienes tiempo para platicar?'
+          });
+      }).then(function () {
+          return botui.action.button({ // user
+              delay: 1000,
+              action: [
+                  {
+                      text: '¡Seguro!',
+                      value: 'good'
+                  },
+                  {
+                      text: 'Al grano',
+                      value: 'really_good'
+                  }
+              ]
+          });
+      }).then(function () {
+          return botui.message.bot({
+              delay: 1500,
+              content: '¡Exelente!, ¿cual es tu nombre? '
+          });
+          }).then(function () {
+              return botui.action.text({
+                  action: {
+                      placeholder: 'Escribe aquí'
+                  }
+              }).then(function (res) { // will be called when it is submitted.
+                  console.log(res.value); // will print whatever was typed in the field.
+                  });
+          });
+  </script>
+
+</body>
+</html>
