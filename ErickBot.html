@@ -19,47 +19,94 @@
 
       botui.message.bot({
           delay: 200,
-          content: '¡Hola, soy Erick!'
+          content: '¡Hola, soy Erick! 😃'
       }).then(function () {
           return botui.message.bot({
               loading: true,
               delay: 1750,
-              content: 'soy un Desarrollador Front-End'
+              content: 'Soy un Ingeniero apasionado por la tecnología '
           });
       }).then(function () {
           return botui.message.bot({
               loading: true,
               delay: 2000,
-              content: 'Tienes tiempo para platicar?'
+              content: '¿Le gustaría conocer mas sobre mi perfil?'
           });
       }).then(function () {
-          return botui.action.button({ // user
-              delay: 1000,
-              action: [
-                  {
-                      text: '¡Seguro!',
-                      value: 'good'
+    return botui.action.button({
+      delay: 1000,
+      action: [         {
+                      text: 'Personal',
+                      value: '1'
                   },
                   {
-                      text: 'Al grano',
-                      value: 'really_good'
-                  }
-              ]
-          });
-      }).then(function () {
+                      text: 'Profesional',
+                      value: '2'
+                  },
+                  {
+                      text: 'Cuentame TODO',
+                      value: '3'
+                  }]
+    })
+}).then(function (res) {
+  if(res.value == '1') {
+    personal();
+  }
+  if(res.value == '2') {
+    profesional();
+  }  else {
+    todo();
+  }
+		  
+     })
+		  
+		  
+		  
+var personal = function () {
+  botui.message
+    .bot({
+	        loading: true,
+      delay: 1000,
+      content: '¡Que gusto!'
+    }).then(function (res) {
+      botui.message
+        .bot({
+		        loading: true,	
+          delay: 2600,
+          content: 'Veras, tengo 30 años, soltero, me gusta mucho cocinar, la fotografía y tengo un gato que se llama panchito'
+        });}).then(function () {
           return botui.message.bot({
-              delay: 1500,
-              content: '¡Exelente!, ¿cual es tu nombre? '
-          });
-          }).then(function () {
-              return botui.action.text({
-                  action: {
-                      placeholder: 'Escribe aquí'
-                  }
-              }).then(function (res) { // will be called when it is submitted.
-                  console.log(res.value); // will print whatever was typed in the field.
-                  });
-          });
+              loading: true,
+              delay: 4000,
+              content: '¿Le gustaría conocer mis otros perfiles?'
+          });}).then(function () {
+    return botui.action.button({
+      delay: 1000,
+      action: [         {
+                   
+                      text: 'Profesional',
+                      value: '2'
+                  },
+                  {
+                      text: 'Cuentame TODO',
+                      value: '3'
+                  }]
+    })
+}).then(function (res) {
+  if(res.value == '1') {
+    personal();
+  }
+  if(res.value == '2') {
+    profesional();
+  }  else {
+    todo();
+  }
+		  
+     });
+	
+}
+		  
+			
   </script>
 
 </body>
